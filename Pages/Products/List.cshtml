@@ -1,0 +1,54 @@
+@page
+@model ListModel
+@{
+    ViewData["Title"] = "List Products";
+    IList<Models.Product>? Products = ViewData["Products"] as IList<Models.Product>;
+}
+<div class="container">
+    <h1 class="mt-5">Search products</h1>
+    <div class="row mt-4">
+        <div class="col-md-6">
+
+            <form method="get">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="productName" value="@ViewData["ProductName"]"
+                        placeholder="Product name">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row mt-4">
+        @if (Products != null && Products.Count > 0)
+        {
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var product in Products)
+                        {
+                            <tr>
+                                <td>@product.Id</td>
+                                <td>@product.Description</td>
+                                <td>@product.Price</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }else{
+             <div class="col-md-12">
+                <p>Products were not found.</p>
+             </div>
+        }
+
+    </div>
+</div>
